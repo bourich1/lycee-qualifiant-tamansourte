@@ -89,21 +89,27 @@ export default function Home() {
       <section className="bg-primary/5 py-12 md:py-24 lg:py-32 relative overflow-hidden">
         <PixelGrid />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 px-2">
-            Welcome to <span className="text-primary">Lycee Qualifiant Tamansourte</span>
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto px-4">
-            Empowering students and administrators with modern tools for a better educational experience.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 px-4">
-            <Link to="/login" className="w-full sm:w-auto">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white w-full px-8">
-                Login to Dashboard
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight mb-8 px-2 leading-[1.1]">
+              Shaping the <span className="text-primary italic">Future Leaders</span> of Tomorrow
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-600 mb-12 max-w-3xl mx-auto px-4 font-light leading-relaxed">
+              At Lycée Qualifiant Tamansourt, we combine rigorous academic excellence with innovative enrichment to develop brilliant, well-rounded minds.
+            </p>
+          </motion.div>
+          <div className="flex flex-col sm:flex-row justify-center gap-6 px-4">
+            <Link to="/login" className="w-full sm:w-auto overflow-hidden group">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white w-full px-12 py-7 text-lg rounded-full transition-all duration-300 transform group-hover:scale-105 shadow-xl shadow-primary/20">
+                Explore Our Campus <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <a href="#about" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="w-full px-8 border-primary text-primary hover:bg-primary/5">
-                Learn More
+            <a href="#about" className="w-full sm:w-auto overflow-hidden group">
+              <Button size="lg" variant="outline" className="w-full px-12 py-7 text-lg rounded-full border-primary/30 text-primary hover:bg-primary/5 transition-all duration-300">
+                Our Vision
               </Button>
             </a>
           </div>
@@ -117,18 +123,17 @@ export default function Home() {
             <div className="px-2 sm:px-0">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium mb-6">
                 <GraduationCap className="h-4 w-4" />
-                About Lycee Qualifiant Tamansourte
+                A Tradition of Excellence & Innovation
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-6">
-                A modern approach to school management and student engagement.
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-8">
+                Innovating Education for the Brighter Tomorrow.
               </h2>
-              <div className="space-y-4 text-slate-600 text-base sm:text-lg leading-relaxed">
+              <div className="space-y-6 text-slate-600 text-base sm:text-lg leading-relaxed">
                 <p>
-                  Lycee Qualifiant Tamansourte is a comprehensive platform designed to streamline communication between school administration and students. 
-                  By empowering class representatives with dedicated tools, we ensure that student voices are heard and administrative tasks are handled efficiently.
+                  As a leading prestigious school in our community, Lycée Qualifiant Tamansourt is dedicated to fostering an environment where academic rigor meets creative innovation. We don't just teach; we inspire students to push boundaries and achieve their fullest potential.
                 </p>
                 <p>
-                  Our mission is to provide a seamless, transparent, and efficient digital environment that supports the educational journey of every student while simplifying the workload of our dedicated staff.
+                  Our curriculum is designed to prepare students for the complexities of the modern world, ensuring they graduate not only with top-tier knowledge but also with the resilience, critical thinking, and character needed to lead in their respective fields.
                 </p>
               </div>
               
@@ -307,57 +312,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section (Original) */}
-      <section className="py-20 bg-white">
+      {/* Pillars of Excellence Section */}
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 px-4">Why Choose Lycee Qualifiant Tamansourte?</h2>
-            <p className="text-slate-500 mt-4 text-sm sm:text-base md:text-lg px-6">Everything you need to succeed in one place.</p>
+          <div className="text-center mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Our Pillars of <span className="text-primary italic">Excellence</span></h2>
+            <p className="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
+              We uphold the highest standards to ensure our students are safe, intellectually challenged, and prepared for future success.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-            <div className="text-center p-8 rounded-2xl bg-slate-50 hover:shadow-lg transition-all border border-slate-100">
-              <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
+            <motion.div 
+              whileHover={{ y: -10 }}
+              className="p-8 rounded-3xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-8 rotate-3">
                 <BookOpen className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Latest Announcements</h3>
-              <p className="text-slate-600 mb-6">Stay updated with the latest news and important notices from the administration.</p>
-              <Link to="/announcements" className="text-primary font-medium hover:text-primary hover:underline flex items-center justify-center gap-1">
-                View Announcements <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">Academic Rigor</h3>
+              <p className="text-slate-600 leading-relaxed mb-6">
+                Our curriculum is taught by top-tier faculty who challenge students to achieve excellence in every discipline, from advanced sciences to the humanities.
+              </p>
+              <ul className="space-y-3 text-sm text-slate-500">
+                <li className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" /> Specialized STEM Programs</li>
+                <li className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" /> Advanced Placement Tracking</li>
+              </ul>
+            </motion.div>
 
-            <div className="text-center p-8 rounded-2xl bg-slate-50 hover:shadow-lg transition-all border border-slate-100">
-              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Sparkles className="w-8 h-8" />
+            <motion.div 
+              whileHover={{ y: -10 }}
+              className="p-8 rounded-3xl bg-blue-50/30 border border-blue-100 shadow-sm hover:shadow-xl transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-8 -rotate-3">
+                <ShieldCheck className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">AI Study Tools</h3>
-              <p className="text-slate-600 mb-6">Access our curated list of AI-powered tools designed to help you excel in your studies.</p>
-              <Link to="/ai-tools" className="text-blue-600 font-medium hover:text-blue-700 flex items-center justify-center gap-1">
-                Explore Tools <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">Unwavering Safety</h3>
+              <p className="text-slate-600 leading-relaxed mb-6">
+                The safety of our students is our absolute priority. We provide a secure, nurturing environment where every child feels protected and supported.
+              </p>
+              <ul className="space-y-3 text-sm text-slate-500">
+                <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-blue-600" /> 24/7 Campus Monitoring</li>
+                <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-blue-600" /> Dedicated Student Support</li>
+              </ul>
+            </motion.div>
 
-            <div className="text-center p-8 rounded-2xl bg-slate-50 hover:shadow-lg transition-all border border-slate-100">
-              <div className="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <motion.div 
+              whileHover={{ y: -10 }}
+              className="p-8 rounded-3xl bg-purple-50/30 border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-8 rotate-6">
                 <Users className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Class Representatives</h3>
-              <p className="text-slate-600 mb-6">Dedicated dashboards for class representatives to communicate directly with administration.</p>
-              <Link to="/login" className="text-purple-600 font-medium hover:text-purple-700 flex items-center justify-center gap-1">
-                Student Portal <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            <div className="text-center p-8 rounded-2xl bg-slate-50 hover:shadow-lg transition-all border border-slate-100">
-              <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Megaphone className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Modern Management</h3>
-              <p className="text-slate-600 mb-6">Powerful tools for school administrators to manage users, content, and requests efficiently.</p>
-              <Link to="/login" className="text-amber-600 font-medium hover:text-amber-700 flex items-center justify-center gap-1">
-                Admin Portal <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">Innovative Minds</h3>
+              <p className="text-slate-600 leading-relaxed mb-6">
+                Through unique enrichment activities like our <Link to="/cyber-team" className="text-purple-600 font-bold hover:underline">Cyber Security Team</Link>, we foster innovative thinking and technical expertise.
+              </p>
+              <ul className="space-y-3 text-sm text-slate-500">
+                <li className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-purple-600" /> Elite Robotics & Tech Clubs</li>
+                <li className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-purple-600" /> Creative Arts Enrichment</li>
+              </ul>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -367,13 +382,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-slate-50 rounded-3xl p-6 sm:p-8 md:p-12 shadow-sm border border-slate-100 max-w-5xl mx-auto flex flex-col md:flex-row gap-10 md:gap-12 items-center text-center md:text-left">
             <div className="flex-1">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-6">Meet the Developer</h2>
-              <p className="text-slate-600 mb-6 text-base sm:text-lg">
-                Hi, I'm [Developer Name], a passionate software developer dedicated to building innovative technical solutions that simplify daily life. I believe that technology can make a real difference in education.
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-6">Built for Excellence</h2>
+              <p className="text-slate-600 mb-8 text-base sm:text-lg leading-relaxed">
+                This platform is crafted by a dedicated team of innovators who believe that technology is the ultimate catalyst for educational transformation. Our mission is to provide the digital tools necessary for the next generation of Moroccan leaders.
               </p>
-              <div className="flex justify-center md:justify-start gap-6">
-                <a href="#" className="text-primary hover:text-primary hover:underline font-bold">LinkedIn</a>
-                <a href="#" className="text-primary hover:text-primary hover:underline font-bold">GitHub</a>
+              <div className="flex justify-center md:justify-start gap-8">
+                <a href="#" className="text-primary hover:text-primary/80 transition-colors font-bold flex items-center gap-2 underline underline-offset-4">LinkedIn</a>
+                <a href="#" className="text-primary hover:text-primary/80 transition-colors font-bold flex items-center gap-2 underline underline-offset-4">GitHub</a>
               </div>
             </div>
             <div className="w-full max-w-[280px] sm:max-w-xs aspect-square rounded-2xl bg-primary/10 flex items-center justify-center text-primary overflow-hidden shadow-inner">
@@ -413,7 +428,7 @@ export default function Home() {
                     </div>
                     <div>
                       <div className="font-bold text-slate-900">Phone Number</div>
-                      <p className="text-slate-500 text-sm">+1 (555) 123-4567 (Mon-Fri 8am-5pm)</p>
+                      <p className="text-slate-500 text-sm">{/* Placeholder for school phone number */}+212 (0) 5XX XX XX XX</p>
                     </div>
                   </div>
 
