@@ -38,7 +38,7 @@ export default function PublicLayout() {
                 <GraduationCap className="h-8 w-8 text-primary" />
                 <span className="font-bold text-xl text-slate-900">LQT</span>
               </Link>
-              <nav className="hidden sm:ml-10 sm:flex sm:space-x-8">
+              <nav className="hidden md:flex md:ml-10 md:space-x-8">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
@@ -52,7 +52,7 @@ export default function PublicLayout() {
             </div>
             
             {/* Desktop Auth */}
-            <div className="hidden sm:flex sm:items-center">
+            <div className="hidden md:flex md:items-center">
               {user ? (
                 <div className="flex items-center gap-4">
                   <Link to="/dashboard">
@@ -92,7 +92,7 @@ export default function PublicLayout() {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="flex items-center sm:hidden">
+            <div className="flex items-center md:hidden">
               <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
@@ -102,24 +102,24 @@ export default function PublicLayout() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="sm:hidden bg-white border-b animate-in slide-in-from-top duration-200">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="md:hidden bg-white border-b animate-in slide-in-from-top duration-200">
+            <div className="px-4 pt-2 pb-6 space-y-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                  className="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 border-b border-slate-50 last:border-0"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4 pb-2 border-t border-slate-100">
+              <div className="pt-4 space-y-1">
                 {user ? (
-                  <div className="space-y-1">
+                  <>
                     <Link
                       to="/dashboard"
-                      className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                      className="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 border-b border-slate-50"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Dashboard
@@ -127,34 +127,37 @@ export default function PublicLayout() {
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <button
-                          className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-red-700 hover:bg-red-50"
+                          className="w-full text-left block px-3 py-3 rounded-md text-base font-medium text-red-600 hover:text-red-700 hover:bg-red-50"
                         >
                           Logout
                         </button>
                       </AlertDialogTrigger>
-                      <AlertDialogContent className="w-[90vw] rounded-2xl">
+                      <AlertDialogContent className="w-[90vw] max-w-sm rounded-2xl">
                         <AlertDialogHeader>
                           <AlertDialogTitle>Logout?</AlertDialogTitle>
                           <AlertDialogDescription>
                             Are you sure you want to end your session?
                           </AlertDialogDescription>
                         </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction onClick={() => { logout(); navigate('/'); setIsMenuOpen(false); }} className="bg-red-600 hover:bg-red-700">
-                            Confirm
+                        <AlertDialogFooter className="flex-col gap-2">
+                          <AlertDialogCancel className="w-full">Cancel</AlertDialogCancel>
+                          <AlertDialogAction 
+                            onClick={() => { logout(); navigate('/'); setIsMenuOpen(false); }} 
+                            className="bg-red-600 hover:bg-red-700 w-full"
+                          >
+                            Confirm Logout
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
                     </AlertDialog>
-                  </div>
+                  </>
                 ) : (
                   <Link
                     to="/login"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-primary hover:text-primary/90 hover:bg-primary/5"
+                    className="block px-3 py-3 rounded-md text-base font-medium text-primary hover:text-primary/90 hover:bg-primary/5"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Login
+                    Login to Dashboard
                   </Link>
                 )}
               </div>
@@ -169,21 +172,23 @@ export default function PublicLayout() {
 
       <footer className="bg-white border-t py-12 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
-            <div className="text-center md:text-left">
-              <Link to="/" className="flex items-center justify-center md:justify-start gap-2 mb-4">
-                <GraduationCap className="h-6 w-6 text-primary" />
-                <span className="font-bold text-lg text-slate-900">LQT</span>
+          <div className="flex flex-col items-center gap-8 text-center mb-8">
+            <div className="flex flex-col items-center">
+              <Link to="/" className="flex items-center gap-2 mb-4">
+                <GraduationCap className="h-8 w-8 text-primary" />
+                <span className="font-bold text-2xl text-slate-900">LQT</span>
               </Link>
-              <p className="text-slate-500 text-sm max-w-xs mx-auto md:mx-0">
+              <p className="text-slate-500 text-sm max-w-xs">
                 Empowering the next generation with modern tools and secure platforms.
               </p>
             </div>
-            <div className="flex flex-col items-center md:items-end gap-4">
-              <div className="flex gap-6 text-slate-400">
-                <Link to="/" className="hover:text-slate-900 transition-colors">Home</Link>
-                <Link to="/announcements" className="hover:text-slate-900 transition-colors">News</Link>
-                <Link to="/ai-tools" className="hover:text-slate-900 transition-colors">Tools</Link>
+            <div className="flex flex-col items-center gap-6">
+              <div className="flex flex-wrap justify-center gap-6 text-slate-500 font-medium">
+                <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+                <Link to="/ranking" className="hover:text-primary transition-colors">Ranking</Link>
+                <Link to="/announcements" className="hover:text-primary transition-colors">News</Link>
+                <Link to="/ai-tools" className="hover:text-primary transition-colors">Tools</Link>
+                <Link to="/cyber-team/join" className="hover:text-primary transition-colors">Cyber Team</Link>
               </div>
             </div>
           </div>

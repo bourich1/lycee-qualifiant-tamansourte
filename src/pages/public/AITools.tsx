@@ -59,7 +59,7 @@ export default function AITools() {
           No AI tools available at the moment. Check back later!
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {tools.map((tool) => (
             <Card key={tool.id} className="overflow-hidden flex flex-col h-full hover:shadow-xl transition-shadow border-0 shadow-md">
               <div className="h-48 overflow-hidden bg-slate-100">

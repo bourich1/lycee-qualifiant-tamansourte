@@ -86,23 +86,23 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       {/* Hero Section */}
-      <section className="bg-primary/5 py-20 lg:py-32 relative overflow-hidden">
+      <section className="bg-primary/5 py-12 md:py-24 lg:py-32 relative overflow-hidden">
         <PixelGrid />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pointer-events-none">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 px-2">
             Welcome to <span className="text-primary">Lycee Qualifiant Tamansourte</span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto px-4">
             Empowering students and administrators with modern tools for a better educational experience.
           </p>
-          <div className="flex justify-center gap-4 pointer-events-auto">
-            <Link to="/login">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 px-4">
+            <Link to="/login" className="w-full sm:w-auto">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white w-full px-8">
                 Login to Dashboard
               </Button>
             </Link>
-            <a href="#about">
-              <Button size="lg" variant="outline" className="px-8 border-primary text-primary hover:bg-primary/5">
+            <a href="#about" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="w-full px-8 border-primary text-primary hover:bg-primary/5">
                 Learn More
               </Button>
             </a>
@@ -111,18 +111,18 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white border-b">
+      <section id="about" className="py-16 md:py-24 bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="px-2 sm:px-0">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium mb-6">
                 <GraduationCap className="h-4 w-4" />
                 About Lycee Qualifiant Tamansourte
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-6">
                 A modern approach to school management and student engagement.
               </h2>
-              <div className="space-y-4 text-slate-600 text-lg leading-relaxed">
+              <div className="space-y-4 text-slate-600 text-base sm:text-lg leading-relaxed">
                 <p>
                   Lycee Qualifiant Tamansourte is a comprehensive platform designed to streamline communication between school administration and students. 
                   By empowering class representatives with dedicated tools, we ensure that student voices are heard and administrative tasks are handled efficiently.
@@ -154,8 +154,8 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="relative">
-              <div className="aspect-square rounded-3xl bg-primary/10 overflow-hidden relative z-10">
+            <div className="relative mt-8 lg:mt-0">
+              <div className="aspect-[4/3] sm:aspect-square rounded-3xl bg-primary/10 overflow-hidden relative z-10 shadow-lg">
                 <img 
                   src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800" 
                   alt="Students collaborating" 
@@ -163,10 +163,10 @@ export default function Home() {
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-100 rounded-full -z-0"></div>
-              <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-primary/5 rounded-full -z-0"></div>
+              <div className="hidden sm:block absolute -top-6 -right-6 w-32 h-32 bg-blue-100 rounded-full -z-0"></div>
+              <div className="hidden sm:block absolute -bottom-6 -left-6 w-48 h-48 bg-primary/5 rounded-full -z-0"></div>
               
-              <div className="absolute bottom-8 right-8 bg-white p-6 rounded-2xl shadow-xl z-20 max-w-xs animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <div className="absolute -bottom-4 right-4 left-4 sm:left-auto sm:bottom-8 sm:right-8 bg-white p-4 sm:p-6 rounded-2xl shadow-xl z-20 max-w-sm sm:max-w-xs animate-in fade-in slide-in-from-bottom-4 duration-700 border border-slate-100">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
                     <Users className="h-5 w-5" />
@@ -212,7 +212,7 @@ export default function Home() {
               No announcements available yet.
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {announcements.map((announcement) => (
                 <motion.div 
                   key={announcement.id}
@@ -270,7 +270,7 @@ export default function Home() {
               No AI tools available yet.
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {tools.map((tool) => (
                 <motion.div 
                   key={tool.id}
@@ -311,10 +311,10 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900">Why Choose Lycee Qualifiant Tamansourte?</h2>
-            <p className="text-slate-500 mt-4 text-sm sm:text-base md:text-lg">Everything you need to succeed in one place.</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 px-4">Why Choose Lycee Qualifiant Tamansourte?</h2>
+            <p className="text-slate-500 mt-4 text-sm sm:text-base md:text-lg px-6">Everything you need to succeed in one place.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
             <div className="text-center p-8 rounded-2xl bg-slate-50 hover:shadow-lg transition-all border border-slate-100">
               <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
                 <BookOpen className="w-8 h-8" />
@@ -363,21 +363,21 @@ export default function Home() {
       </section>
 
       {/* Developer Section */}
-      <section id="developer" className="py-20 bg-white">
+      <section id="developer" className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-slate-50 rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-6">Meet the Developer</h2>
-              <p className="text-slate-600 mb-6 text-lg">
+          <div className="bg-slate-50 rounded-3xl p-6 sm:p-8 md:p-12 shadow-sm border border-slate-100 max-w-5xl mx-auto flex flex-col md:flex-row gap-10 md:gap-12 items-center text-center md:text-left">
+            <div className="flex-1">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-6">Meet the Developer</h2>
+              <p className="text-slate-600 mb-6 text-base sm:text-lg">
                 Hi, I'm [Developer Name], a passionate software developer dedicated to building innovative technical solutions that simplify daily life. I believe that technology can make a real difference in education.
               </p>
-              <div className="flex gap-4">
-                <a href="#" className="text-primary hover:text-primary hover:underline font-medium">LinkedIn</a>
-                <a href="#" className="text-primary hover:text-primary hover:underline font-medium">GitHub</a>
+              <div className="flex justify-center md:justify-start gap-6">
+                <a href="#" className="text-primary hover:text-primary hover:underline font-bold">LinkedIn</a>
+                <a href="#" className="text-primary hover:text-primary hover:underline font-bold">GitHub</a>
               </div>
             </div>
-            <div className="w-full aspect-square rounded-2xl bg-primary/10 flex items-center justify-center text-primary overflow-hidden">
-              <Users className="h-32 w-32" />
+            <div className="w-full max-w-[280px] sm:max-w-xs aspect-square rounded-2xl bg-primary/10 flex items-center justify-center text-primary overflow-hidden shadow-inner">
+              <Users className="h-24 w-24 sm:h-32 sm:w-32" />
             </div>
           </div>
         </div>
@@ -442,27 +442,27 @@ export default function Home() {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-white rounded-2xl p-8 shadow-md border border-slate-100">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-100">
               <form onSubmit={handleContactSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
                     <Label htmlFor="name">Full Name</Label>
-                    <Input id="name" required placeholder="John Doe" />
+                    <Input id="name" required placeholder="John Doe" className="h-11" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
-                    <Input type="email" id="email" required placeholder="john@example.com" />
+                    <Input type="email" id="email" required placeholder="john@example.com" className="h-11" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" required placeholder="How can we help?" />
+                  <Input id="subject" required placeholder="How can we help?" className="h-11" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" rows={5} required placeholder="Your message here..." />
+                  <Textarea id="message" rows={5} required placeholder="Your message here..." className="resize-none" />
                 </div>
-                <button type="submit" className="inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-primary px-2.5 py-1.5 text-sm font-medium text-white hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 w-full h-12 text-lg transition-colors">
+                <button type="submit" className="inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-primary px-2.5 py-1.5 text-sm font-medium text-white hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 w-full h-12 text-lg transition-colors shadow-md">
                   Send Message
                 </button>
               </form>
