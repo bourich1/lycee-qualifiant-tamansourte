@@ -1,0 +1,185 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+
+  /* Colors */
+  --color-primary: #2457ff;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f3f4f6;
+  --color-secondary-foreground: #000000;
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #6b7280;
+  --color-card: #ffffff;
+  --color-card-foreground: #000000;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #000000;
+  --color-border: #e5e7eb;
+  --color-input: #e5e7eb;
+  --color-ring: rgb(59 130 246 / 0.5);
+  --color-success: #22c55e;
+  --color-success-alt: #10b981;
+  --color-dark-1: #000000;
+  --color-dark-2: #010101;
+  --color-dark-3: #030404;
+  --color-dark-4: #08090a;
+  --color-dark-5: #0f0f0f;
+
+  /* Spacing */
+  --spacing-4px: 0.25rem;
+  --spacing-8px: 0.50rem;
+  --spacing-10px: 0.63rem;
+  --spacing-12px: 0.75rem;
+  --spacing-16px: 1.00rem;
+  --spacing-20px: 1.25rem;
+  --spacing-24px: 1.50rem;
+  --spacing-32px: 2.00rem;
+  --spacing-40px: 2.50rem;
+  --spacing-48px: 3.00rem;
+  --spacing-56px: 3.50rem;
+  --spacing-64px: 4.00rem;
+  --spacing-80px: 5.00rem;
+  --spacing-96px: 6.00rem;
+  --spacing-112px: 7.00rem;
+
+  /* Border Radius */
+  --radius-xs: 4px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Breakpoints */
+  --breakpoint-xs: 600px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1400px;
+
+  /* Shadows */
+  --shadow-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-blue-md: 0px 10px 15px -3px rgba(226, 232, 240, 0.5), 0px 4px 6px -4px rgba(226, 232, 240, 0.5);
+  --shadow-blue-sm: 0px 10px 15px -3px rgba(226, 232, 240, 0.3), 0px 4px 6px -4px rgba(226, 232, 240, 0.3);
+
+  /* Typography Sizes */
+  --font-size-h1-huge: 4.50rem;
+  --font-size-h1-xl: 3.75rem;
+  --font-size-h1-lg: 3.00rem;
+  --font-size-h1-md: 2.25rem;
+  --font-size-h1-sm: 1.88rem;
+  --font-size-h1-xs: 1.50rem;
+  --font-size-h1-base: 1.25rem;
+  
+  --font-size-button-lg: 1.13rem;
+  --font-size-button-md: 1.00rem;
+  --font-size-button-sm: 0.88rem;
+
+  --font-size-caption-lg: 0.88rem;
+  --font-size-caption-md: 0.75rem;
+  --font-size-caption-sm: 0.69rem;
+  --font-size-caption-xs: 0.63rem;
+  --font-size-caption-tiny: 0.56rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+    @apply border-border outline-ring/50;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  
+  /* Typography Hierarchy */
+  h1 {
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+  }
+
+  button {
+    font-weight: 600;
+    line-height: 1.5;
+    border-radius: var(--radius-full);
+    padding: 0 48px;
+    transition: all 0.2s;
+  }
+
+  a {
+    color: var(--color-muted-foreground);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  a:hover {
+    color: var(--color-foreground);
+  }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #2457ff;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #000000;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --accent: #f3f4f6;
+  --accent-foreground: #000000;
+  --destructive: #ef4444;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: rgb(59 130 246 / 0.5);
+  --radius: 16px;
+}
+
+.dark {
+  --background: #0f0f0f;
+  --foreground: #ffffff;
+  --card: #0f0f0f;
+  --card-foreground: #ffffff;
+  --popover: #0f0f0f;
+  --popover-foreground: #ffffff;
+  --primary: #2457ff;
+  --primary-foreground: #ffffff;
+  --secondary: #030404;
+  --secondary-foreground: #ffffff;
+  --muted: #08090a;
+  --muted-foreground: #6b7280;
+  --accent: #010101;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #08090a;
+  --input: #08090a;
+  --ring: rgb(59 130 246 / 0.5);
+}
+
+@keyframes matrix-fall {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-matrix-fall {
+  animation: matrix-fall linear infinite;
+}
