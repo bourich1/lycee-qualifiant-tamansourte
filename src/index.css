@@ -71,16 +71,16 @@
   --shadow-blue-md: 0px 10px 15px -3px rgba(226, 232, 240, 0.5), 0px 4px 6px -4px rgba(226, 232, 240, 0.5);
   --shadow-blue-sm: 0px 10px 15px -3px rgba(226, 232, 240, 0.3), 0px 4px 6px -4px rgba(226, 232, 240, 0.3);
 
-  /* Typography Sizes */
-  --font-size-h1-huge: 4.50rem;
-  --font-size-h1-xl: 3.75rem;
-  --font-size-h1-lg: 3.00rem;
-  --font-size-h1-md: 2.25rem;
-  --font-size-h1-sm: 1.88rem;
-  --font-size-h1-xs: 1.50rem;
-  --font-size-h1-base: 1.25rem;
+  /* Typography Sizes (Fluid) */
+  --font-size-h1-huge: clamp(3rem, 5vw + 1rem, 4.50rem);
+  --font-size-h1-xl: clamp(2.5rem, 4vw + 1rem, 3.75rem);
+  --font-size-h1-lg: clamp(2rem, 3vw + 1rem, 3.00rem);
+  --font-size-h1-md: clamp(1.75rem, 2vw + 1rem, 2.25rem);
+  --font-size-h1-sm: clamp(1.5rem, 1.5vw + 1rem, 1.88rem);
+  --font-size-h1-xs: clamp(1.25rem, 1vw + 1rem, 1.50rem);
+  --font-size-h1-base: clamp(1rem, 0.5vw + 1rem, 1.25rem);
   
-  --font-size-button-lg: 1.13rem;
+  --font-size-button-lg: clamp(1rem, 0.5vw + 0.8rem, 1.13rem);
   --font-size-button-md: 1.00rem;
   --font-size-button-sm: 0.88rem;
 
@@ -104,6 +104,7 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
   
   /* Typography Hierarchy */

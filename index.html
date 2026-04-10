@@ -10,10 +10,20 @@
     <meta property="og:description" content="Empowering the next generation of leaders through rigorous academic programs and a commitment to innovation and safety." />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- AOS CSS CDN -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- AOS JS CDN -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true,
+      });
+    </script>
   </body>
 </html>
 

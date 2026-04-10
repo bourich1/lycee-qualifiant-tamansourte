@@ -11,6 +11,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { supabase } from '@/lib/supabase';
 import { format } from 'date-fns';
+import GhostCursor from "@/components/ui/GhostCursor";
+import Hyperspeed from "@/components/ui/Hyperspeed";
 
 type Announcement = {
   id: string;
@@ -84,163 +86,217 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
+    <div className="flex flex-col min-h-screen font-sans overflow-x-hidden">
       {/* Hero Section */}
-      <section className="bg-primary/5 py-12 md:py-24 lg:py-32 relative overflow-hidden">
-        <PixelGrid />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <section className="bg-gradient-to-b from-primary/5 to-white py-16 sm:py-24 md:py-32 relative overflow-hidden flex items-center justify-center min-h-[90vh]">
+        <div className="absolute inset-0 opacity-40 mix-blend-overlay pointer-events-none">
+          <PixelGrid />
+        </div>
+        
+        {/* Mouse Effect (Ghost Cursor) - Hidden per request
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <GhostCursor 
+            trailLength={50}
+            inertia={0.5}
+            grainIntensity={0.05}
+            bloomStrength={0.1}
+            bloomRadius={1}
+            brightness={2}
+            color="#B19EEF"
+            edgeIntensity={0}
+          />
+        </div>
+        */}
+
+        {/* Hyperspeed Warp Effect */}
+        <div className="absolute inset-0 pointer-events-none z-0 w-full h-full">
+          <Hyperspeed 
+            speed={1.5}
+            density={1.2}
+            color="79, 70, 229" // Indigo
+          />
+        </div>
+        
+        {/* Glow Spheres */}
+        <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-primary/20 rounded-full blur-[100px] pointer-events-none -z-10 animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-blue-400/20 rounded-full blur-[80px] pointer-events-none -z-10" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center relative z-10 w-full">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col items-center"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight mb-8 px-2 leading-[1.1]">
-              Shaping the <span className="text-primary italic">Future Leaders</span> of Tomorrow
+            <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-primary/20 shadow-sm text-primary font-bold text-sm">
+              <Sparkles className="h-4 w-4" /> Welcome to Excellence
+            </div>
+            
+            <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-extrabold text-slate-900 tracking-tighter mb-6 leading-[1.05] max-w-5xl">
+              Shaping the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500 italic pr-2">Future Leaders</span> of Tomorrow
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-slate-600 mb-12 max-w-3xl mx-auto px-4 font-light leading-relaxed">
+            
+            <p className="text-[clamp(1.125rem,3vw,1.5rem)] text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
               At Lycée Qualifiant Tamansourt, we combine rigorous academic excellence with innovative enrichment to develop brilliant, well-rounded minds.
             </p>
           </motion.div>
-          <div className="flex flex-col sm:flex-row justify-center gap-6 px-4">
-            <Link to="/login" className="w-full sm:w-auto overflow-hidden group">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white w-full px-12 py-7 text-lg rounded-full transition-all duration-300 transform group-hover:scale-105 shadow-xl shadow-primary/20">
-                Explore Our Campus <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 w-full max-w-md sm:max-w-none mx-auto"
+          >
+            <Link to="/login" className="w-full sm:w-auto block">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white w-full sm:w-auto px-8 sm:px-12 py-6 sm:py-8 text-[clamp(1rem,2vw,1.125rem)] font-bold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-xl shadow-primary/30 group">
+                Explore Our Campus <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-transform" />
               </Button>
             </Link>
-            <a href="#about" className="w-full sm:w-auto overflow-hidden group">
-              <Button size="lg" variant="outline" className="w-full px-12 py-7 text-lg rounded-full border-primary/30 text-primary hover:bg-primary/5 transition-all duration-300">
+            <a href="#about" className="w-full sm:w-auto block">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto px-8 sm:px-12 py-6 sm:py-8 text-[clamp(1rem,2vw,1.125rem)] font-bold rounded-2xl border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-400 transition-all duration-300 bg-white/50 backdrop-blur-md">
                 Our Vision
               </Button>
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 md:py-24 bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="px-2 sm:px-0">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium mb-6">
-                <GraduationCap className="h-4 w-4" />
-                A Tradition of Excellence & Innovation
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-8">
-                Innovating Education for the Brighter Tomorrow.
-              </h2>
-              <div className="space-y-6 text-slate-600 text-base sm:text-lg leading-relaxed">
-                <p>
-                  As a leading prestigious school in our community, Lycée Qualifiant Tamansourt is dedicated to fostering an environment where academic rigor meets creative innovation. We don't just teach; we inspire students to push boundaries and achieve their fullest potential.
-                </p>
-                <p>
-                  Our curriculum is designed to prepare students for the complexities of the modern world, ensuring they graduate not only with top-tier knowledge but also with the resilience, critical thinking, and character needed to lead in their respective fields.
-                </p>
+      <section id="about" className="py-20 md:py-32 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+            
+            {/* Text Content */}
+            <div className="order-2 lg:order-1 space-y-8">
+              <div>
+                <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                  Innovating Education for the Brighter Tomorrow.
+                </h2>
+                <div className="space-y-6 text-slate-600 text-[clamp(1rem,2vw,1.125rem)] leading-relaxed">
+                  <p>
+                    As a premier educational institution, Lycée Qualifiant Tamansourt is dedicated to fostering a resilient environment where academic rigor seamlessly merges with creative innovation.
+                  </p>
+                  <p>
+                    Our dynamic curriculum prepares students to navigate modern complexities, ensuring they graduate equipped with top-tier knowledge, critical thinking, and steadfast character.
+                  </p>
+                </div>
               </div>
               
-              <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+                <div className="flex gap-4 p-5 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-md transition-shadow">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
                     <ShieldCheck className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-900">Secure & Private</h4>
-                    <p className="text-sm text-slate-500">Your data is protected with modern security standards.</p>
+                    <h4 className="font-bold text-slate-900 mb-1">Secure Environment</h4>
+                    <p className="text-sm text-slate-500 leading-snug">Data and physical protection via modern standards.</p>
                   </div>
                 </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                <div className="flex gap-4 p-5 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-md transition-shadow">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
                     <MessageSquare className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-900">Direct Feedback</h4>
-                    <p className="text-sm text-slate-500">Real-time communication between students and staff.</p>
+                    <h4 className="font-bold text-slate-900 mb-1">Direct Feedback</h4>
+                    <p className="text-sm text-slate-500 leading-snug">Transparent communication loops for continual growth.</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="relative mt-8 lg:mt-0">
-              <div className="aspect-[4/3] sm:aspect-square rounded-3xl bg-primary/10 overflow-hidden relative z-10 shadow-lg">
+            {/* Image Composite */}
+            <div className="order-1 lg:order-2 relative mx-auto w-full max-w-lg lg:max-w-none">
+              <div className="aspect-[4/3] rounded-[2rem] bg-slate-100 overflow-hidden relative z-10 shadow-2xl border-4 border-white">
                 <img 
                   src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800" 
                   alt="Students collaborating" 
-                  className="w-full h-full object-cover mix-blend-multiply opacity-80"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  loading="lazy"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <div className="hidden sm:block absolute -top-6 -right-6 w-32 h-32 bg-blue-100 rounded-full -z-0"></div>
-              <div className="hidden sm:block absolute -bottom-6 -left-6 w-48 h-48 bg-primary/5 rounded-full -z-0"></div>
               
-              <div className="absolute -bottom-4 right-4 left-4 sm:left-auto sm:bottom-8 sm:right-8 bg-white p-4 sm:p-6 rounded-2xl shadow-xl z-20 max-w-sm sm:max-w-xs animate-in fade-in slide-in-from-bottom-4 duration-700 border border-slate-100">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
-                    <Users className="h-5 w-5" />
+              {/* Decorative Elements */}
+              <div className="absolute -top-8 -right-8 w-32 h-32 bg-blue-100 rounded-full blur-2xl -z-0"></div>
+              <div className="absolute -bottom-12 -left-8 w-48 h-48 bg-primary/20 rounded-full blur-3xl -z-0"></div>
+              
+              {/* Floating Card */}
+              <div className="absolute -bottom-6 left-4 sm:-left-8 bg-white/90 backdrop-blur-xl p-5 sm:p-6 rounded-3xl shadow-xl z-20 max-w-[85%] sm:max-w-xs border border-white/50">
+                <div className="flex items-center gap-4 mb-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white shadow-inner">
+                    <Users className="h-6 w-6" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-slate-900">Class Reps</div>
-                    <div className="text-xs text-slate-500">Direct Liaison</div>
+                    <div className="text-sm font-bold text-slate-900">Student First</div>
+                    <div className="text-xs text-primary font-medium">Active Engagement</div>
                   </div>
                 </div>
-                <p className="text-xs text-slate-600 italic">
-                  "Lycee Qualifiant Tamansourte has completely transformed how our class communicates with the administration. It's fast and transparent."
+                <p className="text-sm text-slate-600 italic font-medium leading-relaxed">
+                  "LQT transformed how we interact with education. It's fluid and transparent."
                 </p>
               </div>
             </div>
+            
           </div>
         </div>
       </section>
 
       {/* Announcements Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 flex items-center gap-3">
-                <Megaphone className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+      <section className="py-20 md:py-32 bg-slate-50 border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12 lg:mb-16">
+            <div className="max-w-2xl">
+              <h2 className="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold text-slate-900 flex items-center gap-3 tracking-tight mb-3">
+                <Megaphone className="h-8 w-8 text-primary shrink-0" />
                 Latest Announcements
               </h2>
-              <p className="text-slate-500 mt-2 text-sm sm:text-base">Stay updated with the latest school news.</p>
+              <p className="text-slate-500 text-[clamp(1rem,1.5vw,1.125rem)]">Stay updated with breaking school news, schedules, and imperative notices.</p>
             </div>
-            <Link to="/announcements" className="w-full sm:w-auto">
-              <Button variant="ghost" className="text-primary hover:text-primary hover:bg-primary/5 w-full sm:w-auto justify-between sm:justify-center">
-                Show All <ArrowRight className="ml-2 h-4 w-4" />
+            <Link to="/announcements" className="w-full sm:w-auto shrink-0">
+              <Button variant="outline" className="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-900 border-slate-200 font-bold rounded-2xl h-12 px-6 group">
+                View All Board <ArrowRight className="ml-2 h-4 w-4 text-slate-400 group-hover:text-primary group-hover:translate-x-1 transition-all" />
               </Button>
             </Link>
           </div>
 
           {loading ? (
-            <div className="flex justify-center py-12">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <div className="flex justify-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-primary"></div>
             </div>
           ) : announcements.length === 0 ? (
-            <div className="text-center py-12 text-slate-500 bg-slate-50 rounded-2xl">
-              No announcements available yet.
+            <div className="text-center py-20 text-slate-500 bg-white rounded-3xl border border-slate-100 shadow-sm font-medium">
+              No recent announcements.
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {announcements.map((announcement) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {announcements.map((announcement, index) => (
                 <motion.div 
                   key={announcement.id}
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.2 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
                 >
-                  <Card className="border border-slate-100 shadow-sm hover:shadow-md transition-shadow h-full bg-white">
-                    <CardHeader className="pb-2">
-                      <div className="flex items-center text-xs text-slate-500 mb-2">
-                        <Calendar className="h-3 w-3 mr-1" />
-                        {format(new Date(announcement.createdAt), 'MMM d, yyyy')}
-                      </div>
-                      <CardTitle className="text-lg font-bold line-clamp-1 text-slate-900">{announcement.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-slate-600 text-sm line-clamp-3">{announcement.content}</p>
-                    </CardContent>
-                    <CardFooter className="pt-0">
-                      <Link to="/announcements" className="text-primary text-sm font-medium hover:underline flex items-center gap-1">
-                        Read more <ArrowRight className="h-3 w-3" />
-                      </Link>
-                    </CardFooter>
-                  </Card>
+                  <Link to="/announcements" className="block h-full outline-none focus-visible:ring-4 ring-primary/20 rounded-3xl group">
+                    <Card className="h-full bg-white border border-slate-100/60 shadow-sm group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 rounded-3xl overflow-hidden flex flex-col relative z-0">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <CardHeader className="p-6 md:p-8 pb-4">
+                        <div className="flex items-center text-xs font-semibold text-slate-400 bg-slate-50 w-fit px-3 py-1.5 rounded-lg mb-4">
+                          <Calendar className="h-3.5 w-3.5 mr-2" />
+                          {format(new Date(announcement.createdAt), 'MMMM d, yyyy')}
+                        </div>
+                        <CardTitle className="text-xl md:text-2xl font-bold line-clamp-2 text-slate-900 tracking-tight">{announcement.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="px-6 md:px-8 flex-grow">
+                        <p className="text-slate-600 text-[clamp(0.95rem,1.2vw,1rem)] line-clamp-3 leading-relaxed">{announcement.content}</p>
+                      </CardContent>
+                      <CardFooter className="p-6 md:p-8 pt-4 border-t border-slate-50 mt-auto bg-slate-50/50">
+                        <span className="text-primary text-sm font-bold flex items-center gap-1 group-hover:underline underline-offset-4">
+                          Read full article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </span>
+                      </CardFooter>
+                    </Card>
+                  </Link>
                 </motion.div>
               ))}
             </div>
@@ -248,59 +304,137 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pillars of Excellence Section */}
+      <section className="py-20 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="text-center mb-16 md:mb-24">
+            <h2 className="text-[clamp(2.5rem,6vw,4rem)] font-extrabold text-slate-900 mb-6 tracking-tight">
+              Pillars of <span className="text-primary italic relative">
+                Excellence
+                <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 15 100 5" stroke="currentColor" strokeWidth="4" fill="transparent"/></svg>
+              </span>
+            </h2>
+            <p className="text-slate-500 max-w-2xl mx-auto text-[clamp(1.125rem,2vw,1.25rem)] leading-relaxed">
+              We uphold the highest standards to ensure our students are safe, intellectually challenged, and primed for the future.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+            {[
+              {
+                icon: BookOpen,
+                title: "Academic Rigor",
+                color: "primary",
+                desc: "Our curriculum challenges students to achieve excellence in every discipline, from advanced sciences to comprehensive humanities.",
+                points: ["Specialized STEM Programs", "Advanced Placement Tracking"]
+              },
+              {
+                icon: ShieldCheck,
+                title: "Unwavering Safety",
+                color: "blue",
+                desc: "The safety of our students is absolute. We provide a secure, nurturing environment where every child feels protected.",
+                points: ["24/7 Campus Monitoring", "Dedicated Support Staff"]
+              },
+              {
+                icon: Users,
+                title: "Innovative Minds",
+                color: "purple",
+                desc: "Through unique enrichment activities, we foster innovative thinking and robust technical expertise for tomorrow's leaders.",
+                points: ["Elite Tech & Cyber Clubs", "Creative Arts Immersion"]
+              }
+            ].map((pillar, idx) => (
+              <motion.div 
+                key={idx}
+                whileHover={{ y: -8 }}
+                className={`p-8 sm:p-10 rounded-[2rem] border transition-all duration-300 relative overflow-hidden group
+                  ${pillar.color === 'primary' ? 'bg-slate-50 border-slate-100 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5' : 
+                    pillar.color === 'blue' ? 'bg-blue-50/30 border-blue-100/50 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5' : 
+                    'bg-purple-50/30 border-purple-100/50 hover:border-purple-200 hover:shadow-xl hover:shadow-purple-500/5'}`}
+              >
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform duration-300
+                  ${pillar.color === 'primary' ? 'bg-primary/10 text-primary rotate-3' : 
+                    pillar.color === 'blue' ? 'bg-blue-100 text-blue-600 -rotate-3' : 
+                    'bg-purple-100 text-purple-600 rotate-6'}`}
+                >
+                  <pillar.icon className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">{pillar.title}</h3>
+                <p className="text-slate-600 leading-relaxed mb-8 text-[clamp(0.95rem,1.2vw,1.05rem)]">
+                  {pillar.desc}
+                </p>
+                <ul className="space-y-4">
+                  {pillar.points.map((point, i) => (
+                    <li key={i} className="flex items-center gap-3 text-sm font-semibold text-slate-700 bg-white/50 p-3 rounded-xl border border-white">
+                      <Sparkles className={`h-4 w-4 shrink-0 ${pillar.color === 'primary' ? 'text-primary' : pillar.color === 'blue' ? 'text-blue-600' : 'text-purple-600'}`} /> 
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* AI Tools Section */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 flex items-center gap-3">
-                <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
-                Featured AI Tools
+      <section className="py-20 md:py-32 bg-slate-900 border-t border-slate-800 relative z-0 overflow-hidden">
+        {/* Dark Background Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12 lg:mb-16">
+            <div className="max-w-2xl">
+              <h2 className="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold text-white flex items-center gap-3 tracking-tight mb-3">
+                <Sparkles className="h-8 w-8 text-blue-400 shrink-0" />
+                Featured Intelligence
               </h2>
-              <p className="text-slate-500 mt-2 text-sm sm:text-base">Boost your productivity with AI.</p>
+              <p className="text-slate-400 text-[clamp(1rem,1.5vw,1.125rem)]">Boost productivity with our curated suite of modern AI tools.</p>
             </div>
-            <Link to="/ai-tools" className="w-full sm:w-auto">
-              <Button variant="ghost" className="text-blue-600 hover:text-blue-700 hover:bg-blue-100/50 w-full sm:w-auto justify-between sm:justify-center">
-                Show All <ArrowRight className="ml-2 h-4 w-4" />
+            <Link to="/ai-tools" className="w-full sm:w-auto shrink-0">
+              <Button variant="outline" className="w-full sm:w-auto border-slate-700 bg-slate-800/50 hover:bg-slate-800 text-white font-bold rounded-2xl h-12 px-6 group backdrop-blur-md">
+                View Arsenal <ArrowRight className="ml-2 h-4 w-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
               </Button>
             </Link>
           </div>
 
           {loading ? (
-            <div className="flex justify-center py-12">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <div className="flex justify-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-500"></div>
             </div>
           ) : tools.length === 0 ? (
-            <div className="text-center py-12 text-slate-500 bg-white rounded-2xl">
-              No AI tools available yet.
+            <div className="text-center py-20 text-slate-400 bg-slate-800/50 backdrop-blur-md rounded-3xl border border-slate-700 font-medium">
+              No AI tools cataloged yet.
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {tools.map((tool) => (
                 <motion.div 
                   key={tool.id}
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -8 }}
                   transition={{ duration: 0.2 }}
+                  className="h-full"
                 >
-                  <Card className="overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition-shadow h-full bg-white">
-                    <div className="h-40 overflow-hidden bg-slate-100">
+                  <Card className="h-full bg-slate-800/80 backdrop-blur-xl border-slate-700 overflow-hidden shadow-2xl rounded-3xl flex flex-col group">
+                    <div className="aspect-[16/9] w-full overflow-hidden bg-slate-900 relative">
+                      <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10"></div>
                       <img 
                         src={tool.imageUrl} 
                         alt={tool.name} 
-                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
                         referrerPolicy="no-referrer"
                       />
                     </div>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-lg font-bold text-slate-900">{tool.name}</CardTitle>
+                    <CardHeader className="p-6 md:p-8 pb-2 border-none">
+                      <CardTitle className="text-xl md:text-2xl font-bold text-white tracking-tight">{tool.name}</CardTitle>
                     </CardHeader>
-                    <CardContent>
-                      <CardDescription className="line-clamp-2 text-slate-600">{tool.description}</CardDescription>
+                    <CardContent className="px-6 md:px-8 border-none flex-grow">
+                      <CardDescription className="line-clamp-3 text-slate-400 text-base leading-relaxed">{tool.description}</CardDescription>
                     </CardContent>
-                    <CardFooter className="pt-0">
-                      <Button asChild variant="link" className="p-0 h-auto text-blue-600 font-medium hover:text-blue-700">
-                        <a href={tool.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
-                          Try it now <ExternalLink className="h-3 w-3" />
+                    <CardFooter className="p-6 md:p-8 pt-4 border-t border-slate-700/50 mt-auto bg-slate-800/30">
+                      <Button asChild variant="link" className="p-0 h-auto text-blue-400 font-bold hover:text-blue-300 text-base flex items-center gap-2 group-hover:underline underline-offset-4">
+                        <a href={tool.link} target="_blank" rel="noopener noreferrer">
+                          Launch Tool <ExternalLink className="h-4 w-4" />
                         </a>
                       </Button>
                     </CardFooter>
@@ -312,175 +446,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pillars of Excellence Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Our Pillars of <span className="text-primary italic">Excellence</span></h2>
-            <p className="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
-              We uphold the highest standards to ensure our students are safe, intellectually challenged, and prepared for future success.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
-            <motion.div 
-              whileHover={{ y: -10 }}
-              className="p-8 rounded-3xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300"
-            >
-              <div className="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-8 rotate-3">
-                <BookOpen className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">Academic Rigor</h3>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                Our curriculum is taught by top-tier faculty who challenge students to achieve excellence in every discipline, from advanced sciences to the humanities.
-              </p>
-              <ul className="space-y-3 text-sm text-slate-500">
-                <li className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" /> Specialized STEM Programs</li>
-                <li className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" /> Advanced Placement Tracking</li>
-              </ul>
-            </motion.div>
-
-            <motion.div 
-              whileHover={{ y: -10 }}
-              className="p-8 rounded-3xl bg-blue-50/30 border border-blue-100 shadow-sm hover:shadow-xl transition-all duration-300"
-            >
-              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-8 -rotate-3">
-                <ShieldCheck className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">Unwavering Safety</h3>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                The safety of our students is our absolute priority. We provide a secure, nurturing environment where every child feels protected and supported.
-              </p>
-              <ul className="space-y-3 text-sm text-slate-500">
-                <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-blue-600" /> 24/7 Campus Monitoring</li>
-                <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-blue-600" /> Dedicated Student Support</li>
-              </ul>
-            </motion.div>
-
-            <motion.div 
-              whileHover={{ y: -10 }}
-              className="p-8 rounded-3xl bg-purple-50/30 border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300"
-            >
-              <div className="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-8 rotate-6">
-                <Users className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">Innovative Minds</h3>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                Through unique enrichment activities like our <Link to="/cyber-team" className="text-purple-600 font-bold hover:underline">Cyber Security Team</Link>, we foster innovative thinking and technical expertise.
-              </p>
-              <ul className="space-y-3 text-sm text-slate-500">
-                <li className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-purple-600" /> Elite Robotics & Tech Clubs</li>
-                <li className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-purple-600" /> Creative Arts Enrichment</li>
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Developer Section */}
-      <section id="developer" className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-slate-50 rounded-3xl p-6 sm:p-8 md:p-12 shadow-sm border border-slate-100 max-w-5xl mx-auto flex flex-col md:flex-row gap-10 md:gap-12 items-center text-center md:text-left">
-            <div className="flex-1">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-6">Built for Excellence</h2>
-              <p className="text-slate-600 mb-8 text-base sm:text-lg leading-relaxed">
-                This platform is crafted by a dedicated team of innovators who believe that technology is the ultimate catalyst for educational transformation. Our mission is to provide the digital tools necessary for the next generation of Moroccan leaders.
-              </p>
-              <div className="flex justify-center md:justify-start gap-8">
-                <a href="#" className="text-primary hover:text-primary/80 transition-colors font-bold flex items-center gap-2 underline underline-offset-4">LinkedIn</a>
-                <a href="#" className="text-primary hover:text-primary/80 transition-colors font-bold flex items-center gap-2 underline underline-offset-4">GitHub</a>
-              </div>
-            </div>
-            <div className="w-full max-w-[280px] sm:max-w-xs aspect-square rounded-2xl bg-primary/10 flex items-center justify-center text-primary overflow-hidden shadow-inner">
-              <Users className="h-24 w-24 sm:h-32 sm:w-32" />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">Contact Us</h2>
-            <p className="mt-4 text-lg text-slate-500">Have questions? We're here to help.</p>
+      <section id="contact" className="py-20 md:py-32 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="text-center mb-16 md:mb-20">
+            <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold text-slate-900 tracking-tight">Contact Administrations</h2>
+            <p className="mt-4 text-[clamp(1.125rem,2vw,1.25rem)] text-slate-500 max-w-2xl mx-auto">Have inquiries? Our staff is here to provide exceptional support.</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="max-w-3xl mx-auto">
             {/* Contact Information */}
-            <div className="space-y-8">
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
-                <h3 className="text-xl font-bold text-slate-900 mb-6">Get in Touch</h3>
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-5 w-5 text-primary" />
+            <div className="space-y-6">
+              <div className="bg-white rounded-[2rem] p-8 md:p-10 shadow-sm border border-slate-100">
+                <h3 className="text-2xl font-extrabold text-slate-900 mb-8 tracking-tight">Direct Lines</h3>
+                <div className="space-y-8">
+                  {[
+                    { icon: MapPin, title: "Our Location", desc: "Lycée Qualifiant Tamansourte, Morocco", color: "text-primary", bg: "bg-primary/10" },
+                    { icon: Phone, title: "Phone Support", desc: "+212 (0) 5XX XX XX XX", color: "text-blue-600", bg: "bg-blue-50" },
+                    { icon: Mail, title: "Email Address", desc: "contact@tamansourte.edu", color: "text-purple-600", bg: "bg-purple-50" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-5">
+                      <div className={`w-14 h-14 rounded-2xl ${item.bg} flex items-center justify-center flex-shrink-0 border border-white shadow-inner`}>
+                        <item.icon className={`h-6 w-6 ${item.color}`} />
+                      </div>
+                      <div className="pt-1">
+                        <div className="font-bold text-slate-900 text-lg mb-1">{item.title}</div>
+                        <p className="text-slate-500 font-medium">{item.desc}</p>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-bold text-slate-900">Our Location</div>
-                      <p className="text-slate-500 text-sm">Lycee Qualifiant Tamansourte, Tamansourte, Morocco</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                      <Phone className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <div className="font-bold text-slate-900">Phone Number</div>
-                      <p className="text-slate-500 text-sm">{/* Placeholder for school phone number */}+212 (0) 5XX XX XX XX</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0">
-                      <Mail className="h-5 w-5 text-purple-600" />
-                    </div>
-                    <div>
-                      <div className="font-bold text-slate-900">Email Address</div>
-                      <p className="text-slate-500 text-sm">contact@tamansourte.edu</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-
-              <div className="bg-primary rounded-2xl p-8 text-white relative overflow-hidden">
-                <div className="relative z-10">
-                  <h3 className="text-xl font-bold mb-2">Need immediate help?</h3>
-                  <p className="text-white/90 mb-6 text-sm">Our support team is available during school hours to assist you with any technical issues.</p>
-                  <Button variant="outline" className="bg-white text-primary hover:bg-slate-50 border-white">
-                    Live Chat Support
-                  </Button>
-                </div>
-                <GraduationCap className="absolute -bottom-6 -right-6 h-32 w-32 text-white/10 rotate-12" />
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-100">
-              <form onSubmit={handleContactSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Full Name</Label>
-                    <Input id="name" required placeholder="John Doe" className="h-11" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input type="email" id="email" required placeholder="john@example.com" className="h-11" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" required placeholder="How can we help?" className="h-11" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" rows={5} required placeholder="Your message here..." className="resize-none" />
-                </div>
-                <button type="submit" className="inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-primary px-2.5 py-1.5 text-sm font-medium text-white hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 w-full h-12 text-lg transition-colors shadow-md">
-                  Send Message
-                </button>
-              </form>
             </div>
           </div>
         </div>

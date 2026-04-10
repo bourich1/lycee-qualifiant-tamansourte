@@ -107,36 +107,36 @@ export default function PublicCompetition() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className={`flex flex-col items-center group relative ${isFirst ? 'order-1 md:order-2 scale-110 z-10' : idx === 0 ? 'order-2 md:order-1' : 'order-3 md:order-3'}`}
+                className={`flex flex-col items-center group relative w-full sm:w-[90%] md:w-full mx-auto ${isFirst ? 'order-1 md:order-2 scale-105 z-10' : idx === 0 ? 'order-2 md:order-1 scale-95' : 'order-3 md:order-3 scale-95'}`}
               >
                 {/* Winner Card */}
-                <Card className={`w-full overflow-hidden border-none shadow-2xl rounded-[2.5rem] transition-all hover:-translate-y-2 ${isFirst ? 'bg-[#FFF9EA]' : idx === 0 ? 'bg-[#F2F6FF]' : 'bg-[#FFF3EC]'}`}>
-                  <div className={`h-2 ${isFirst ? 'bg-yellow-400' : idx === 0 ? 'bg-blue-400' : 'bg-orange-400'}`} />
-                  <CardContent className="p-8 text-center flex flex-col items-center">
+                <Card className={`w-full overflow-hidden border-none shadow-xl rounded-3xl transition-all hover:-translate-y-2 ${isFirst ? 'bg-[#FFF9EA]' : idx === 0 ? 'bg-[#F2F6FF]' : 'bg-[#FFF3EC]'}`}>
+                  <div className={`h-1.5 ${isFirst ? 'bg-yellow-400' : idx === 0 ? 'bg-blue-400' : 'bg-orange-400'}`} />
+                  <CardContent className="p-6 text-center flex flex-col items-center">
                     
-                    <div className="relative mb-6">
-                      <div className={`w-28 h-28 rounded-full flex items-center justify-center text-4xl font-black text-white shadow-2xl ${getColor(section.name)}`}>
+                    <div className="relative mb-5 mt-2">
+                      <div className={`w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-2xl md:text-3xl font-black text-white shadow-xl ${getColor(section.name)}`}>
                         {getAbbr(section.name)}
                       </div>
-                      <div className={`absolute -bottom-2 -right-1 w-10 h-10 rounded-full flex items-center justify-center border-4 border-white text-white font-bold text-sm shadow-lg ${isFirst ? 'bg-yellow-500' : idx === 0 ? 'bg-slate-500' : 'bg-orange-500'}`}>
+                      <div className={`absolute -bottom-2 -right-1 w-8 h-8 rounded-full flex items-center justify-center border-4 border-white text-white font-bold text-xs shadow-md ${isFirst ? 'bg-yellow-500' : idx === 0 ? 'bg-slate-500' : 'bg-orange-500'}`}>
                         {isFirst ? '1' : idx === 0 ? '2' : '3'}
                       </div>
-                      {isFirst && <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-5xl">👑</div>}
+                      {isFirst && <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-4xl">👑</div>}
                     </div>
 
-                    <h3 className="font-black text-slate-900 text-2xl mb-1 uppercase tracking-tighter truncate max-w-full">
+                    <h3 className="font-black text-slate-900 text-xl md:text-2xl mb-1 uppercase tracking-tighter truncate max-w-full">
                       {section.name}
                     </h3>
-                    <p className="text-slate-400 text-sm font-bold uppercase mb-4 tracking-widest italic">
-                      {section.best_student_name || 'Class Representative'}
+                    <p className="text-slate-400 text-xs md:text-sm font-bold uppercase mb-4 tracking-widest italic truncate max-w-[90%]">
+                      {section.best_student_name || 'Representative'}
                     </p>
 
                     <div className="flex flex-col items-center">
-                       <span className="text-5xl font-black text-slate-900 tracking-tighter">{section.total_score}</span>
-                       <span className="text-xs font-black text-slate-400 uppercase">Points</span>
+                       <span className="text-4xl font-black text-slate-900 tracking-tighter">{section.total_score}</span>
+                       <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Points</span>
                     </div>
 
-                    <Badge className="mt-6 bg-white/50 text-slate-500 border-none px-4 py-1 font-bold">
+                    <Badge className="mt-5 bg-white/60 text-slate-500 border-none px-3 py-1 text-[10px] font-bold">
                        EXPERT LEVEL 🎖️
                     </Badge>
                   </CardContent>
